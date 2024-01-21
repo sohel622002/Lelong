@@ -1,0 +1,41 @@
+{% extends 'admin/base.html' %}
+
+{% block title %} All Orders {% endblock %}
+
+{% block body %}
+
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Tracking Id</th>
+      <th scope="col">Payment Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% if data %}
+{% for order in data[1] %}
+	{% if order.paymentStatus == 'succeeded' %}
+	<tr>
+			<td>{{order.id}}</td>
+			<td>{{order.trackingid}}</td>
+			
+			<td>{{order.paymentStatus}}</td>
+			<td><a href="{{ '/admin/orders/'+order.trackingid }}" class="btn btn-primary btn-sm">View</a></td>
+	</tr>
+
+	{% endif %}
+
+{% endfor %}    
+	{% endif %}
+
+
+
+  </tbody>
+</table>
+
+</div>
+
+{% endblock %}

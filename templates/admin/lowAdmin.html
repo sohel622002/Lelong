@@ -1,0 +1,42 @@
+{% extends 'admin/base.html' %}
+
+{% block title %} Create Admins {% endblock %}
+
+{% block body %}
+{% if message %}
+	
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+
+
+{% if creds %}
+<div class="alert alert-success mb-2" role="alert">
+  <h4 class="alert-heading">User created!</h4>
+  <p><div class="us"><strong>Username:</strong> {{creds.user}}</div><div class="pw"><strong>Password: </strong>{{creds.passw}}</div></p>
+  <hr>
+  <p class="mb-0">Make sure to take a note of username and password. This will not be visible again.</p>
+</div>
+
+{% endif %}
+
+<div class="container mt-4">
+	<h2 class="text-center">Admin for selection of winner</h2>
+	<form method="POST">
+		<input list="prod" id="prod-choice" name="productChoice" />
+
+		<datalist id="prod">
+			{% for product in allProducts %}
+		  		<option value="{{product[0]}}"></option>
+			{% endfor %}
+
+		</datalist>
+		<button class="btn btn-primary btn-sm" type="submit">Generate creds</button>
+	</form>
+</div>
+
+
+{% endblock %}

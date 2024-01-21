@@ -1,0 +1,34 @@
+{% extends 'admin/base.html' %}
+
+{% block title %} Status {% endblock %}
+
+
+
+{% block body %}
+{% if 'payment_intent' in request.args %}
+<div class="container mt-5">
+	<div id="output">
+		<h1 class="text-center">Please wait for 5 second</h1>
+	</div>
+</div>
+
+{% endif %}
+{% if message %}
+<script type="text/javascript">
+	setTimeout(()=>{
+		let content = `<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Congratulations!</h4>
+  <p>Your order has been successfully placed!</p>
+  <hr>
+  <p class="mb-0">You will receive order tracking via E-Mail.</p>
+</div>`
+
+	document.getElementById("output").innerHTML = content;
+	setTimeout(()=>{
+		window.location.href='/home'
+	},7000)
+	},5000)
+</script>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'admin/base.html' %}
+
+{% block title %} Order Details {% endblock %}
+
+{% block body %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Key</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+
+{% for key,value in order_document.items() %}
+    <tr>
+      <th scope="row">{{key | replace("_"," ")}}</th>
+      <td>{{value | replace("_dot_",".") | replace("_comma_",",") | replace("_and_","&") | replace("_perc_","%") | replace("_"," ") | replace("-"," ")}}</td>
+     
+    </tr>
+
+{% endfor %}
+  </tbody>
+
+</table>
+
+
+{% endblock %}

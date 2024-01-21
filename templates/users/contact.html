@@ -1,0 +1,61 @@
+{% extends 'users/base.html' %} {% block title %} Contact {% endblock %} {% block
+body %}
+
+<link rel="stylesheet" href="/static/css/home/contact.css" />
+
+{% if message %}
+<div id="messages" role="alert">
+  <div class="info">
+    <span class="detail">
+      <i class="fa-solid fa-check"></i>
+      <span>{{message}}</span>
+    </span>
+    <i class="fa-solid fa-xmark cross-icon"></i>
+  </div>
+</div>
+{% endif %}
+
+<section class="contact-container">
+  <div class="contact-wrapper">
+    <div class="contact-us-detail">
+      <h2>Contact Us</h2>
+      <div>
+        <i class="fa-solid fa-envelope"></i> <span>auctionshopmalaysia@gmail.com</span>
+      </div>
+      <div><i class="fa-solid fa-phone"></i> <span>+60 10947 1037</span></div>
+    </div>
+    <div class="contact-form">
+      <form action="/contact" method="POST">
+        <div>
+          <h2>Get in Touch</h2>
+          <p>Feel free to drop us a line below!</p>
+        </div>
+        <div class="inputs">
+          <input type="text" placeholder="Your Name" name="name" required />
+          <input type="email" placeholder="Email Address" name="email" required />
+          <textarea
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="Your Message"
+            name="message"
+           required></textarea>
+        </div>
+        <button class="button">
+          SEND MESSAGE <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const errorMessage = document.querySelector("#messages");
+  const cross_btn = document.querySelector(".cross-icon");
+
+  cross_btn.addEventListener("click", () => {
+    errorMessage.style.display = "none";
+  });
+</script>
+
+{% endblock %}

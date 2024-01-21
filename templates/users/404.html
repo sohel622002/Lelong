@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+
+{% block title %} 404 {% endblock %}
+
+{% block body %}
+
+<h1 style="text-align:center;margin: 100px 0px;">404 Not Found</h1>
+
+<script type="text/javascript">
+	setTimeout(()=>{
+		window.location.href='/home'
+	},5000)
+</script>
+{% endblock %}

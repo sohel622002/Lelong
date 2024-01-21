@@ -1,0 +1,40 @@
+{% extends 'admin/base.html' %}
+{% block title %} Reset Password {% endblock %}
+
+{% block body %}
+{% if error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <strong>Error: </strong> {{error}}
+   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+   <strong>Success: </strong> {{ success }}
+   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<div class="container mt-5">
+	<h1 class="text-center">Reset Password</h1>
+	<form method="POST" action="/admin/resetPassword">
+       <label for="users" class="form-label"> 
+            Datalist 
+        </label> 
+          
+        <input class="form-control" 
+            list="users" id="user" 
+            placeholder="Select user" name="user"> 
+        <datalist id="users"> 
+            {% for user in users %}
+            	<option value="{{user[0]}}">{{user[0]}}</option>
+            {% endfor %}
+        </datalist> 
+        <input class="form-control mt-3" type="number" name="whatsappNum" placeholder="Whatsapp number">
+        <input class="form-control mt-3" type="text" name="newPassword" placeholder="New password">
+        <button type="submit" class="mt-3 btn btn-primary btn-sm">Reset</button>
+	</form>
+
+</div>
+
+{% endblock %}

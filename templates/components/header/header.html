@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/static/css/home/base.css" />
+    <title>Lelong Shop Malaysia |{% block title %}Home2{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="header-front">
+          <div>
+            <span>EN </span>
+            <span>
+              <i class="fa-solid fa-angle-down"></i>
+            </span>
+          </div>
+          <span class="call-span"> Call us toll free: +60-123-456-7890 </span>
+          <span class="email-span">
+            Send us an email: auctionshopmalaysia@gmail.com
+          </span>
+        </div>
+        <div class="header-back">
+          <span><i class="fa-solid fa-truck"></i></span>
+          <span>Order Tracking</span>
+        </div>
+        <div class="call-icon-mobile"><i class="fa-solid fa-phone"></i></div>
+      </div>
+    </header>
+    <div class="logo-search-container">
+      <img src="/static/assets/logo.png" alt="logo" class="sham-logo" />
+      <div class="search-container">
+        <select>
+          <option value="">Category 01</option>
+          <option value="">Category 02</option>
+          <option value="">Category 03</option>
+          <option value="">Category 04</option>
+        </select>
+        <input type="text" placeholder="Search Products..." size="50" />
+        <span class="search-icon"
+          ><i class="fa-solid fa-magnifying-glass" style="color: white"></i
+        ></span>
+      </div>
+      <div class="my-cart-container">
+        <div class="cart-wrapper">
+          <span class="my-cart">My Cart</span>
+          <span class="my-cart-items">0 items, $0.00</span>
+        </div>
+        <span><i class="fa-solid fa-basket-shopping"></i></span>
+      </div>
+      <div class="mobile-header-links">
+        <span>
+          <a href="#"><i class="fa-solid fa-user"></i></a>
+        </span>
+        <span>
+          <a href="#"><i class="fa-solid fa-heart"></i></a>
+        </span>
+        <span>
+          <a href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+        </span>
+        <span>
+          <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+        </span>
+        <span class="mobile-header-links_bars">
+          <a href="#"><i class="fa-solid fa-bars"></i></a>
+        </span>
+      </div>
+    </div>
+    <div class="category-wrapper">
+      <div class="category-container">
+        <div class="category-front">
+          <button class="category-button">CATEGORIES</button>
+          <div class="category-links">
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+          </div>
+        </div>
+        <div class="category-links">
+          {% if loggedIn %}
+
+          {% else %}
+          <a href="/login" id="signin">Sign In</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {% block body %} {% endblock %}
+
+    <!-- Search Wrapper -->
+    <div class="search-wrapper">
+      <div class="search-section-container">
+        <h3>Brouse through our Product library!</h3>
+        <div class="search-function-wrapper">
+          <input type="text" placeholder="Search products..." />
+          <span class="search-icon"
+            ><i class="fa-solid fa-magnifying-glass" style="color: white"></i
+          ></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-main">
+          <div class="footer-logo">
+            <img src="/static/assets/logo.png" alt="logo" />
+          </div>
+          <a href="#">auctionshopmalaysia@gmail.com</a>
+          <p>+60 10947 1037</p>
+          <div class="footer-main-links">
+            <a href="https://www.facebook.com"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="https://www.twitter.com"
+              ><i class="fa-brands fa-twitter"></i
+            ></a>
+            <a href="https://www.linkedin.com"
+              ><i class="fa-brands fa-linkedin-in"></i
+            ></a>
+            <a href="https://www.instagram.com/"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="https://www.tiktok.com"
+              ><i class="fa-brands fa-tiktok"></i
+            ></a>
+          </div>
+        </div>
+        <div class="usefull-links">
+          <h2>Usefull Links</h2>
+          <ul>
+            <li>
+              <i class="fa-solid fa-angles-right"></i>
+              <a href="">Home</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-angles-right"></i>
+              <a href="">About Us</a>
+            </li>
+            <li>
+              <i class="fa-solid fa-angles-right"></i>
+              <a href="">Shop Now</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sub-footer">
+        @ Copyright by Lelong Shop Malaysia. All Rights Reserved.
+      </div>
+    </footer>
+    <div class="mobile-footer">
+      <div class="mobile-footer-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Search</span>
+      </div>
+      <div class="mobile-footer-wrapper">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <span>Cart</span>
+      </div>
+      <div class="mobile-footer-wrapper">
+        <i class="fa-regular fa-heart"></i>
+        <span>Wishlist</span>
+      </div>
+      <div class="mobile-footer-wrapper">
+        <i class="fa-regular fa-user"></i>
+        <span>Account</span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,211 @@
+/* Order Tracking form */
+
+.search-orders{
+    padding: 50px 0;
+}
+
+.search-orders form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-orders  form > p{
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 1.5;
+}
+
+.input-row{
+    display: flex;
+    gap: 30px;
+}
+
+.input-row > div{
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.input-row > div > label{
+    font-weight: 500;
+    font-size: clamp(1rem, 5vw, 1.3rem);
+}
+
+.input-row > div > input{
+    font-size: 16px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 10px 20px;
+    border-radius: 30px;
+}
+
+.blue-btn{
+    transition: .3s;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(38, 149, 255);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.blue-btn:hover{
+    color: rgb(38, 149, 255);
+    background-color: white;
+    outline: 2px solid rgb(38, 149, 255);
+}
+
+
+/* Orders */
+.order-tracking-wrapper {
+  max-width: 1400px;
+  padding: 50px 20px;
+  margin-inline: auto;
+  margin-bottom: 30px;
+}
+
+.ordertracking-top-sec{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding-bottom: 20px;
+}
+
+.ordertracking-top-sec > p {
+  font-size: 18px;
+}
+
+.ordertracking-top-sec > p > a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.ordertracking-top-sec > h1 {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+}
+
+.orders-wrapper{
+    margin-top: 30px;
+}
+
+.order-container{
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.order-detail{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-detail_product{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.order-detail_product .product-name{
+    font-weight: 600;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+}
+
+.order-detail_info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-detail_image > img{
+    width: 100px;
+}
+
+.order-tracking-container{
+    max-width: 750px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.order-track{
+    position: relative;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-stations{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-trackline{
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.order-trackline > div{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(38, 149, 255);
+    /* transform-origin: left; */
+    transition: .5s;
+    transform: scale(0, 1);
+}
+
+.order-stations > div{
+    display: flex;
+    gap: 10px;
+}
+
+.order-stations > div i{
+    font-size: 18px;
+}
+
+.order-track  i{
+    background-color: white;
+    color: black;
+}
+
+.order-track .checked i{
+    background-color: white !important;
+    color: rgb(38, 149, 255) !important;
+}
+
+@media (max-width:750px){
+    .order-tracking-container{
+        flex-direction: row;
+        min-height: 400px;
+    }
+    .order-stations,
+    .order-track{
+        flex-direction: column;
+    }
+    .order-trackline{
+        height: 98%;
+        width: 4px;
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+    .input-row{
+        flex-direction: column;
+    }
+}
+
+@media (max-width:530px){
+    .order-detail{
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+}

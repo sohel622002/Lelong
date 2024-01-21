@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <p id="demo" class="ms-5"></p>
+
+    {% for detail in details %}
+
+    <div class="container mt-4 mb-3">
+      <h1>Bid By <span id="username">None</span></h1>
+      <h4>
+        Bid:
+        <p id="b_{{ details[0][0] }}">{{ detail[3] }}</p>
+      </h4>
+    </div>
+    <div class="container">
+      <div class="card" style="width: 18rem">
+        <img
+          src="{{'/static/inventory/'+detail[5]}}"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title" id="{{detail[2]}}">{{detail[1]}}</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the
+            bulk of the card's content.
+          </p>
+
+          <input
+            type="number"
+            min="1"
+            value="1"
+            id="{{ 'bidPrice_' + detail[0]  | string}}"
+          />
+          <button onclick="add('{{ 'bidPrice_' + detail[0] | string }}')">
+            +
+          </button>
+          <button
+            onclick="bid('{{ 'bidPrice_' + detail[0] | string }}')"
+            id="bidButton"
+          >
+            Bid
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        let charset = "abcdefghijklmnopqrstuvqys"
+        let tokenChars = "abcdefghijklmnopqrstuvqys01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        function Randomization(charset,length){
+          let output = ""
+          for(var i = 0;i<length;i++){
+            let ind = Math.floor(Math.random() * 10) + 1
+            output +=charset[ind]
+
+          }
+          return output
+        }
+
+        let username = Randomization(charset,6)
+        let token = Randomization(tokenChars,16)
+
+
+
+        const socket = io.connect(location.protocol+'//' + document.domain + ':' + location.port);
+
+        function formatDate(inputDate) {
+          const dateObject = new Date(inputDate);
+
+          const month = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(dateObject);
+          const day = dateObject.getDate();
+          const year = dateObject.getFullYear();
+          const time = dateObject.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
+
+          return `${month} ${day}, ${year} ${time}`;
+        }
+
+        function updateTimer() {
+          const dateInput = "{{detail[10]}}";
+          const formattedDate = new Date(formatDate(dateInput));
+
+          var now = new Date().getTime();
+
+          var distance = formattedDate - now;
+
+
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+          document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+          + minutes + "m " + seconds + "s ";
+          if (distance < 0) {
+            // clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED";
+          }
+        }
+
+        setInterval(updateTimer,1000)
+
+        function add(inputId) {
+            var inputElement = document.getElementById(inputId);
+            if (inputElement) {
+                inputElement.value = parseInt(inputElement.value) + 1;
+            }
+        }
+
+
+      socket.on('update_bid', function(data) {
+          console.log(data);
+          if (data.response !== undefined) {
+              let responseData = JSON.parse(data.response);
+              let bId = `b_${data.productId}`;
+              let b = document.getElementById(bId);
+
+              if (b) {
+                  b.innerHTML = `${responseData.currentPrice}`;
+              }
+
+              let sId = `bidPrice_${data.productId}`;
+              console.log(`bidPrice_${data.productId}`);
+              let c = document.getElementById(sId);
+              
+              document.getElementById("username").innerHTML = responseData.username;
+
+          }
+      });
+
+        function bid(od) {
+            let productName = "{{detail[1]}}".replace(" ","_")
+            let amount = {
+                "username":username,
+                "productName":productName,
+                "identity":od,
+                "amount":parseInt(document.getElementById(od).value),
+                "currentPrice":parseInt({{detail[3]}})
+            }
+          document.getElementById('bidButton').disabled = true;
+          setTimeout(function() {
+              document.getElementById('bidButton').disabled = false;
+            }, 3000);
+            socket.emit('bid', amount);
+          }
+    </script>
+    {% endfor %}
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

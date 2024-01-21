@@ -1,0 +1,71 @@
+{% extends 'users/base.html' %} 
+
+{% block title %} Login {% endblock %} 
+
+{% block body %}
+
+<link rel="stylesheet" href="/static/css/home/login.css" />
+<section class="login-section">
+  <div class="login-top-sec">
+    <p><a href="#">Lelong Shop Malaysia </a>/ <a href="#">My account</a></p>
+    <h1>My account</h1>
+  </div>
+    {% if error %}
+
+  <div class="errorContainer">
+    <div class="errorBox">
+      <div class="mainError">
+        <h5 id="fullError"><img src="https://www.freeiconspng.com/uploads/a-red-error-exclamation-sign-meaningful-official-round-26.png" width="3%" style="margin-right: 10px;"><span id="errorStyle" style="margin-right: 10px;">Error:</span>{{error}}</h5>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="form-containers">
+    <div class="form-container">
+      <h1>Login</h1>
+      <form action="/login" method="POST">
+
+
+        <div class="label-input-wrapper">
+          <label for="l-username">Usename or email address</label>
+          <input type="text" name="username" id="l-username" />
+        </div>
+        <div class="label-input-wrapper">
+          <label for="l-password">Password</label>
+          <input type="text" name="password" id="l-password" />
+        </div>
+        <div>
+          <input type="checkbox" id="l-remember-me" />
+          <label for="l-remember-me">Remember Me</label>
+        </div>
+        <div>
+          <button class="form-button">LOG IN</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="form-container">
+      <h1>Register</h1>
+      <form action="/register" method="POST">
+        <div class="label-input-wrapper">
+          <label for="username">Usename</label>
+          <input type="text" name="username" id="r-username" />
+        </div>
+        <div class="label-input-wrapper">
+          <label for="number">Whatsapp Number</label>
+          <input type="number" name="whatsappNum" id="number" pattern="[0-9]" />
+        </div>
+        <div class="label-input-wrapper">
+          <label for="r-password">Password</label>
+          <input type="password" name="password" id="r-password" />
+        </div>
+        
+        <div>
+          <button class="form-button">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

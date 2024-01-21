@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %}
+
+
+{% block title %} List products {% endblock %}
+
+{% block body %}
+{% if data|length > 0 %}
+
+
+<div class="container mt-5">
+	<h1 class="text-center"> All products</h1>
+	<table class="table table-hover table-dark">
+	  <thead>
+	    <tr>
+	      <th scope="col">Id</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Starting Bid</th>
+	      <th scope="col">All bids</th>
+	      <th scope="col">Action</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	  	{% if privs == 'admin' %}
+	  	{% for d in data %}
+	  	<form action="/admin/displayProducts" method="POST">
+		    <tr>
+		      <input type="hidden" name="idValue" value="{{d.id}}">
+		      <th scope="row">{{d.id}}</th>
+		      <td>{{d.name  | replace("_dot_",".") | replace("_comma_",",") | replace("_and_","&") | replace("_perc_","%") | replace("_"," ") | replace("-"," ")}}</td>
+		      <td>{{d.startingPrice}} MYR.</td>
+		      <td><a class="btn btn-primary btn-sm" href="{{ '/admin/bids/'+d.endpointName }}">Bids</button></td>
+		      <td><button class="btn btn-danger btn-sm">Delete</button></td>
+		    </tr>
+		</form>
+		{% endfor %}
+		{% else %}
+
+	  	{% for d in data %}
+	  	{% if d.name == privs %}
+	  	<form action="/admin/displayProducts" method="POST">
+		    <tr>
+		      <input type="hidden" name="idValue" value="{{d.id}}">
+		      <th scope="row">{{d.id}}</th>
+		      <td>{{d.name}}</td>
+		      <td>{{d.startingPrice}} MYR.</td>
+		      <td><a class="btn btn-primary btn-sm" href="{{ '/admin/bids/'+d.endpointName }}">Bids</button></td>
+		      <td><button class="btn btn-danger btn-sm">Delete</button></td>
+		    </tr>
+		</form>
+		{% endif %}
+		{% endfor %}
+
+
+		{% endif %}
+	  </tbody>
+	</table>
+
+	{% else %}
+  <h3 class="text-center mt-5">No products</h3>
+{% endif %}
+</div>
+{% endblock %}

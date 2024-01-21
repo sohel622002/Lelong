@@ -1,0 +1,393 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.product-section {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 20px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* header ------------------------------------------------------------------------ */
+
+.product-sec-header {
+  padding: 35px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-sec-front{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-sec-greetings{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.product-sec-greetings > .username{
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-weight: 600;
+}
+
+.product-sec-front > p {
+  color: rgba(0, 0, 0, 0.35);
+  font-weight: 500;
+}
+
+.product-sec-front > p a {
+  text-decoration: none;
+  color: inherit;
+  margin-right: 5px;
+}
+
+.product-sec-front > h1 {
+  font-size: clamp(1.2rem, 5vw, 2rem);
+}
+
+.product-sec-front > h4 {
+  color: rgba(0, 0, 0, 0.35);
+  font-size: clamp(0.3rem, 3vw, 1rem);
+}
+
+/* Product Main Section */
+
+.product-sec-main {
+  display: flex;
+  gap: 50px;
+  padding-block: 40px;
+
+}
+
+
+.product-sec-images-container {
+
+  flex: 0.45;
+}
+
+.product-sec-images-container > .product-images{
+  width: 100%;
+  margin-top: 30px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.product-sec-images-container > .product-images > img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+
+.product-sec-image {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+.product-sec-image > img {
+  width: 100%;
+}
+.product-sec-images {
+  display: flex;
+  margin-top: 20px;
+}
+
+.product-sec-images > a {
+  width: min(120px, 30%);
+}
+
+.product-sec-images > a > img {
+  width: 100%;
+  object-fit: contain;
+}
+
+/* Product Detail ----------------------------------- */
+
+.product-sec-detail-wrapper {
+  flex: 0.55;
+}
+
+.product-detail {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgb(96, 96, 96);
+  line-height: 1.2;
+}
+
+.current-bid,
+.bid-by {
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 10px;
+}
+.starting-bid {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.product-detail-container {
+  padding: 20px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.grey-small-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.bold-text {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 600;
+}
+
+.mtb-10 {
+  margin-block: 10px;
+}
+
+.time-left-wrapper {
+  padding: 20px 0;
+}
+
+.time-left-container {
+  margin-top: 15px;
+  display: flex;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.time-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 3px;
+}
+
+.time-zon {
+  margin-top: 10px;
+}
+
+.biding-function {
+  margin-block: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.biding-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.biding-price {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.biding-price > span {
+  display: inline-block;
+  padding: 10px;
+}
+.mines,
+.plus {
+  font-size: 20px;
+  cursor: pointer;
+}
+.bid-price {
+  font-size: 18px;
+  font-weight: 500;
+}
+.bid-price > input{
+  width: min-content;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+}
+.bid-links {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.bid-links:nth-child(3):hover,
+.bid-links:nth-child(4):hover {
+  color: rgb(38, 149, 255);
+}
+
+.bid-links > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.hammer-link {
+  color: white;
+  background-color: rgb(38, 149, 255);
+}
+
+.biding-button > a {
+  text-decoration: none;
+  color: rgb(38, 149, 255);
+  font-weight: 500;
+  border: 2px solid rgb(38, 149, 255);
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.navigation-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.social-links {
+  text-align: center;
+  width: 45px;
+  padding-block: 3px;
+  border-radius: 20px;
+}
+
+.social-links:nth-child(1) {
+  color: white;
+  background-color: rgb(3, 169, 244);
+}
+.social-links:nth-child(2) {
+  color: white;
+  background-color: rgb(63, 81, 181);
+}
+.social-links:nth-child(3) {
+  color: white;
+  background-color: rgb(76, 175, 80);
+}
+.social-links:nth-child(4) {
+  color: white;
+  background-color: rgb(189, 8, 28);
+}
+.social-links:nth-child(5) {
+  color: white;
+  background-color: rgb(26, 123, 170);
+}
+.social-links:nth-child(6) {
+  color: white;
+  background-color: rgb(50, 175, 237);
+}
+.social-links:nth-child(7) {
+  color: white;
+  background-color: rgb(212, 79, 66);
+}
+
+/* Info Section ----------------------------------------------------------------------------- */
+
+.info-tabs {
+  display: flex;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+}
+.tabs {
+  font-size: clamp(0.5rem, 2vw, 0.8rem);
+  flex: 1;
+  padding: 23px;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  background-color: rgb(38, 149, 255);
+  color: white;
+  cursor: pointer;
+}
+
+.tabs:hover,
+.tabs.active {
+  background-color: white;
+  color: rgb(38, 149, 255);
+}
+
+.info-section {
+  padding-block: 25px;
+  margin-bottom: 80px;
+}
+
+.info {
+  display: none !important;
+}
+
+/* Table ----------------------------------------------------------------------------------- */
+
+.addi-info > table {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  width: 25%;
+}
+
+th,
+td {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.024);
+}
+
+/* Auc History ---------------------------------------------------------------------------- */
+
+.auc-history {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 1040px) {
+  .product-sec-main {
+
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 630px) {
+
+  .info-tabs {
+    flex-direction: column;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .align-heart-icon{
+    display: none;
+  }
+}

@@ -1,0 +1,92 @@
+{% extends 'users/base.html' %} {% block title %} Wishlist {% endblock %} {% block
+body %}
+
+<link rel="stylesheet" href="/static/css/home/wishlist.css" />
+<section class="wishlist-sec">
+  <div class="wishlist-header">
+    <div class="wishlist-front">
+      <p><a href="#">Lelong Shop Malaysia</a> / <a href="#"> Wishlist</a></p>
+      {% if wishlists | length > 0 %}
+      <h1>Wishlist</h1>
+    </div>
+  </div>
+  <div class="wishlist-body">
+    <table>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>Product Name</th>
+        <th>Unit Price</th>
+        <th>Stock Status</th>
+        <th></th>
+      </tr>
+      {% for wish in wishlists %}
+      <tr>
+
+        <td>
+          <span class="xmark" style="transition: 0.3s">
+          <button onclick="removeTag(this)" style="background:none;border:none" data-id="{{wish.id}}">
+
+            <i class="fa-solid fa-xmark" style="transition: 0.4s"></i>
+          </button>
+
+          </span>
+        </td>
+        <td>
+          <span class="product-image">
+            <img src="{{'/static/inventory/'+wish.image}}" alt="mobile" />
+          </span>
+        </td>
+        <td>
+          <span class="product-name">
+            <h2>{{wish.name | replace("_dot_",".") | replace("_comma_",",") | replace("_and_","&") | replace("_perc_","%") | replace("_"," ") | replace("-"," ")}}</h2>
+          </span>
+        </td>
+        <td>
+          Starting bid :
+          <span class="product-starting-price">  RM {{wish.startingPrice}}</span>
+        </td>
+        <td>
+          {% if wish.winner != 'True' %}
+            <span class="instock">
+                In Stock
+            </span>
+
+            {% else %}
+            <span class="instock" style="color:red;">
+                Bidding Ended
+            </span>
+
+            {% endif %}
+          
+
+
+
+        </td>
+        <td>
+            <span class="hammer-icon" style="transition: 0.3s">
+               <a href="{{'/product/'+wish.endpointName}}"  class="hammers" ><i class="fa-solid fa-gavel" ></i></a>
+            </span>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {%else %}
+  <h1 style="text-align: center; margin: 40px 0px"> No products in the wishlist</h1>
+
+  {% endif %}
+  <div class="wishlist-footer">
+    <div>Share On:</div>
+    <div class="share-links">
+      <a href="#" class="social-link"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+      <a href="#" class="social-link"><i class="fa-brands fa-pinterest-p"></i></a>
+      <a href="#" class="social-link"><i class="fa-regular fa-envelope"></i></a>
+      <a href="#" class="social-link"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+  </div>
+</section>
+
+  <script src="/static/JS/wishlist.js"></script>
+{% endblock %}

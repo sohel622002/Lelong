@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Lelong Shop | {% block title %} {% endblock %}</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/static/assets/logo.png"
+    />
+
+   </head>
+   <body>
+{% if loggedIn %}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/admin/home">Lelong Shop Admin</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        {% if privs == 'admin' %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/addProducts">Add Products</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/contacts">Contacts</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/displayProducts">Display</a>
+        </li>    
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/allorders">All Orders</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/resetPassword">Reset Password</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/newAdmin">New Admin</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/ordertrack">Order Track</a>
+        </li>
+        {% else %}
+        
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin/displayProducts">Display</a>
+        </li>    
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% endif %}
+     {% block body %}
+
+     {% endblock %}
+
+     <footer>
+
+     </footer>
+   </body>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>

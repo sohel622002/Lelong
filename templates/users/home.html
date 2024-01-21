@@ -1,0 +1,290 @@
+{% extends 'users/base.html' %} {% block title %} Home {% endblock %} {% block
+body %}
+
+<link rel="stylesheet" href="/static/css/home/home.css" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<link rel="stylesheet" href="/static/css/animation/animation.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Product Slider -->
+<div class="product-slider">
+  <span class="left-slide-arrow arrows"
+    ><i class="fa-solid fa-chevron-left"></i
+  ></span>
+  <div class="product-slider-container">
+    <div class="slider-content">
+      <h4 class="slider-content_subheading">TECH EQUIPMENT</h4>
+      <h1>MACBOOK</h1>
+    </div>
+    <div class="price-circle">
+      <span>from</span>
+      <span class="price">RM1500</span>
+      <span class="inc-taxes">Incl. Taxes</span>
+    </div>
+
+    <div class="slider-images slide01">
+      <img
+        class="laptop slider-image"
+        src="/static/assets/Product-slider/macbook_gold-1.png"
+        alt="macbook_gold-1"
+      />
+      <img class="headphones slider-image" src="/static/assets/Product-slider/object_headphones_1-1.png" alt="headphone">
+
+      <img class="watches slider-image watch01" src="/static/assets/Product-slider/watch_tp.png" alt="watch01">
+      <img class="watches slider-image watch02" src="/static/assets/Product-slider/watch_tp2.png" alt="watch01">
+      <img class="watches slider-image watch03" src="/static/assets/Product-slider/watch_tp3.png" alt="watch01">
+
+      <img class="triangle1" src="/static/assets/svgs/Polygon 1.svg" alt="triangle">
+      <img class="triangle2" src="/static/assets/svgs/Polygon 1.svg" alt="triangle2">
+      <img class="triangle3" src="/static/assets/svgs/Polygon pink.svg" alt="triangle3">
+
+    </div>
+
+    <div class="slider-content-footer">
+      <div class="slider-content-details">
+        <div>
+          <span class="slider-content-check"
+            ><i class="fa-solid fa-check"></i
+          ></span>
+          <span>2.9 GHZ Dual-Core Intel Core i5</span>
+        </div>
+      </div>
+      <div class="slider-content-details">
+        <div>
+          <span class="slider-content-check"
+            ><i class="fa-solid fa-check"></i
+          ></span>
+          <span>256 GB SSD and PCIe Basic(On-Board)</span>
+        </div>
+      </div>
+      <div class="slider-content-details">
+        <div>
+          <span class="slider-content-check"
+            ><i class="fa-solid fa-check"></i
+          ></span>
+          <span>8GB 2133 MHz LPDDR3 Arbeitsspeicher</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="right-slide-arrow arrows"
+    ><i class="fa-solid fa-chevron-right"></i
+  ></span>
+</div>
+
+<!-- Cust Services -->
+<div class="cust-services">
+  <div class="cust-service">
+    <img
+      src="/static/assets/support_icons.png"
+      alt="support"
+      class="cust-service-icon"
+    />
+    <div class="cust-service-detail">
+      <h1>Call Center</h1>
+      <p>Completely Synergize</p>
+    </div>
+  </div>
+  <div class="cust-service">
+    <img
+      src="/static/assets/tracking_icons.png"
+      alt="tracking"
+      class="cust-service-icon"
+    />
+    <div class="cust-service-detail">
+      <h1>Order Tracking</h1>
+      <p>Objectively empowered</p>
+    </div>
+  </div>
+  <div class="cust-service">
+    <img
+      src="/static/assets/deliveries_icons.png"
+      alt="support"
+      class="cust-service-icon"
+    />
+    <div class="cust-service-detail">
+      <h1>Fastest Delivery</h1>
+      <p>Efficiently unleash media</p>
+    </div>
+  </div>
+  <div class="cust-service">
+    <img
+      src="/static/assets/money_icons.png"
+      alt="support"
+      class="cust-service-icon"
+    />
+    <div class="cust-service-detail">
+      <h1>Instant Buying</h1>
+      <p>Podcasting operational</p>
+    </div>
+  </div>
+</div>
+
+<!-- Latest Auction -->
+<div class="latest-auctions-wrapper">
+  <div class="latest-auction-header">
+    <h1>LATEST AUCTIONS</h1>
+    <svg
+      width="100%"
+      height="25"
+      viewBox="0 0 275 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect y="7" width="120" height="1" fill="#CCCCCC"></rect>
+      <rect x="155" y="7" width="120" height="1" fill="#CCCCCC"></rect>
+      <path
+        d="M144.443 14.6458C144.207 14.8818 143.897 15 143.588 15C143.278 15 142.968 14.8818 142.732 14.6454L137.874 9.78689C137.517 9.43023 137.43 8.90654 137.612 8.46798L136.617 7.47264L135.242 8.84723C135.517 9.2862 135.458 9.8809 135.066 10.2714C134.614 10.7245 133.888 10.7342 133.448 10.2936L130.324 7.17126C129.883 6.73028 129.893 6.00566 130.347 5.55298C130.738 5.16122 131.332 5.10231 131.771 5.37788L135.378 1.77014C135.102 1.33158 135.161 0.737682 135.553 0.346326C136.006 -0.10676 136.73 -0.116443 137.171 0.324136L140.295 3.44732C140.736 3.8879 140.726 4.61251 140.272 5.0656C139.88 5.45736 139.287 5.51586 138.849 5.2407L137.472 6.6169L138.59 7.73449C138.945 7.69334 139.314 7.80348 139.586 8.07622L144.444 12.9347C144.916 13.4071 144.916 14.1729 144.443 14.6458Z"
+        fill="#2695FF"
+      ></path>
+    </svg>
+  </div>
+  <div class="latest-auction-products">
+    {% for product in products %}
+    <div class="latest-auction-product" id="productCard_{{product.id}}">
+      <div class="product-header">
+        <img
+          src="{{ '/static/inventory/'+product.imagePath}}"
+          alt="{{product.name}}" class="productImage"
+        />
+        <div class="lat-auc-pro-btn-links" >
+
+          <span class="heart-link" style="transition: 0.2s" id="hearts_{{product.id}}">
+            <button
+              onclick="addTag(this.dataset.id)"
+              data-id="{{product.id}}"
+              style="
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+              "
+            >
+              <i class="fa-regular fa-heart"></i>
+            </button>
+          </span>
+        </div>
+        <div class="time-biding">
+          <h4>Time Left:</h4>
+          <div class="time-biding-timer">
+            <div>
+              <span class="time" id="days_{{product.id}}">196</span>
+              <span class="day">Days</span>
+            </div>
+            <div>
+              <span class="time" id="hours_{{product.id}}">9</span>
+              <span class="day">Hours</span>
+            </div>
+            <div>
+              <span class="time" id="minutes_{{product.id}}">38</span>
+              <span class="day">Minutes</span>
+            </div>
+            <div>
+              <span class="time" id="seconds_{{product.id}}">30</span>
+              <span class="day">Seconds</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="product-detail">
+        {% if product.status == 'sold' %}
+        <h3>
+          <a
+            href="{{'/product/'+product.endpointName }}"
+            style="text-decoration: none; color: red"
+            >Product Sold</a
+          >
+        </h3>
+        <p id="{{product.startingPrice}}"><span class="starting-rm">Starting RM {{product.startingPrice}}</span></p>
+        {% else %}
+        {% if product.openClose == 'OPEN' %}
+
+        <h3>
+          <a
+            href="{{'/product/'+product.endpointName }}"
+            style="text-decoration: none; color: black" id="{{product.name}}"
+            >{{product.name  | replace("_dot_",".") | replace("_comma_",",") | replace("_and_","&") | replace("_perc_","%") | replace("_"," ") | replace("-"," ")}}</a
+          >
+        </h3>
+        <p id="{{product.startingPrice}}"><span class="starting-rm">Starting RM {{product.startingPrice}}</span></p>
+        {% else %}
+        <h3>
+          <a
+            href="{{'/product/'+product.endpointName }}"
+            style="text-decoration: none; color: black"
+            >Bidding Ended</a
+          >
+        </h3>
+        {% endif %}
+        {% endif %}
+
+      </div>
+    </div>
+    {% endfor %}
+    <!-- Latest Auction -->
+  </div>
+</div>
+
+<script src="/static/JS/slider.home.js"></script>
+
+<script src="/static/JS/wishlist.js"></script>
+{% for product in products %}
+<script type="text/javascript">
+  
+function calculateTimeDifference(targetDate) {
+  // Convert the target date to a JavaScript Date object
+  const targetDateTime = new Date(targetDate);
+
+  function updateDifference() {
+    // Get the current date and time
+    const currentDateTime = new Date();
+
+    // Calculate the time difference in milliseconds
+    const timeDifference = targetDateTime - currentDateTime;
+
+    // Calculate the time components
+    const seconds = Math.floor(timeDifference / 1000) % 60;
+    const minutes = Math.floor(timeDifference / (1000 * 60)) % 60;
+    const hours = Math.floor(timeDifference / (1000 * 60 * 60)) % 24;
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24)) % 30;
+    const weeks = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 7)) % 4;
+    const months = Math.floor(timeDifference / (1000 * 60 * 60 * 24 * 30));
+    if (seconds >=0 && minutes >=0 && hours >=0 && days >=0 && weeks >=0){
+      document.getElementById("days_{{product.id}}").innerHTML = days;
+      document.getElementById("hours_{{product.id}}").innerHTML = hours;
+      document.getElementById("minutes_{{product.id}}").innerHTML = minutes;
+      document.getElementById("seconds_{{product.id}}").innerHTML = seconds;
+      
+
+    }
+    
+    else{
+      document.getElementById("days_{{product.id}}").innerHTML = 0;
+      document.getElementById("hours_{{product.id}}").innerHTML = 0;
+      document.getElementById("minutes_{{product.id}}").innerHTML = 0;
+      document.getElementById("seconds_{{product.id}}").innerHTML = 0;
+      document.getElementById("hearts_{{product.id}}").style.display = "none"
+      document.getElementById("productCard_{{product.id}}").style.backgroundColor = "rgba(189, 189, 189, 0.4)"
+      document.getElementById("{{product.name}}").innerHTML = "Bidding Closed"
+      document.getElementById("{{product.startingPrice}}").innerHTML = "Time exceeded"
+
+    }
+    // Update the time difference every second
+    setTimeout(updateDifference, 1000);
+  }
+
+  // Initial call to start the countdown
+  updateDifference();
+}
+calculateTimeDifference("{{product.maxLimit}}");
+
+</script>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,297 @@
+{% extends 'users/base.html' %} {% block title %} Cart {% endblock %} {% block
+body %}
+
+<link rel="stylesheet" href="/static/css/home/cart.css" />
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<section class="cart-section-wrapper">
+
+  <div class="cart-header">
+    <p><a href="/home">Lelong Shop Malaysia</a> / <a href="/cart">Cart</a></p>
+    <h1>Cart</h1>
+  </div>
+
+  {% if loggedIn %}
+  {% if userCart | length > 0 %}
+  <div class="cart-body">
+    <div class="cart-products">
+      <table>
+        <tr class="header-row">
+          <td class="bold-txt">Image</td>
+          <td class="bold-txt">Product</td>
+          <td class="bold-txt">Price</td>
+          <td class="bold-txt">Quantity</td>
+        </tr>
+        {% for items in userCart %}
+        <tr class="product">
+          <td style="padding: 0 20px">
+            <img
+              src="{{'/static/inventory/'+items[2]}}"
+              alt="mobile"
+              class="product-image"
+            />
+          </td>
+          <td>
+            <div class="product-detail">
+              <span class="product-name">{{items[1] | replace("_dot_",".") | replace("_comma_",",") | replace("_and_","&") | replace("_perc_","%") | replace("_"," ") | replace("-"," ")}}</span>
+            </div>
+          </td>
+          <td>
+            <span class="product-price bold-txt"> RM {{items[6]}}  </span>
+          </td>
+          <td>1</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <!-- Checkout Section -->
+<!-- Checkout Section -->
+<section class="checkout-section-wrapper">
+  <div class="cart-header">
+    <p><a href="/home">Lelong Shop Malaysia</a> / <a href="/cart">Cart</a></p>
+    <h1>Checkout</h1>
+  </div>
+
+  <h1 class="payment-header">Payment</h1>
+  <p class="payment-note">
+    Note: FPX is only available to Stripe accounts in MY.
+  </p>
+
+  <form id="payment-form">
+    <div class="row">
+      <input type="hidden" id="token" value="" name="token" />
+      <div class="input-label-wrapper">
+        <label for="fname">First Name <span>*</span></label>
+        <input type="text" id="fname" name="fname" />
+      </div>
+      <div class="input-label-wrapper">
+        <label for="lname">Last Name <span>*</span></label>
+        <input type="text" id="lname" name="lname" />
+      </div>
+    </div>
+    <div class="input-label-wrapper">
+      <label for="company">Company Name (Optional)</label>
+      <input type="text" id="company" name="company" />
+    </div>
+    <div class="input-label-wrapper">
+      <label for="country">Country / Region <span>*</span></label>
+      <select name="country" required>
+        <option value="Malaysia" name="country">Malaysia</option>
+      </select>
+    </div>
+    <div class="input-label-wrapper">
+      <label for="address">Address <span>*</span></label>
+      <textarea id="address" cols="30" rows="10" name="address"></textarea>
+    </div>
+    <div class="row">
+      <div class="input-label-wrapper">
+        <label for="phone">Phone Number <span>*</span></label>
+        <input type="number" id="phone" name="phone_no" />
+      </div>
+      <div class="input-label-wrapper">
+        <label for="email">Email Address <span>*</span></label>
+        <input type="email" id="email" name="email" />
+      </div>
+    </div>
+    <div class="order-checkout">
+      <h2>Your Order</h2>
+      <table>
+        <tr>
+          <th>product</th>
+          <th>Price</th>
+        </tr>
+        {% for items in userCart %}
+        <tr>
+          <td>
+            <div class="prdered-product">
+              <h3>{{items[1] | replace("_dot_",".") | replace("_comma_",",") | replace("_and_","&") | replace("_perc_","%") | replace("_"," ") | replace("-"," ")}}</h3>
+              <input
+                type="hidden"
+                name="product_{{items[1]}}"
+                value="{{items[1]}}"
+              />
+              <p>Vendor : Lelong Shop Malaysia</p>
+            </div>
+          </td>
+          <td>RM{{items[6]}}</td>
+          <input type="hidden" name="price_{{items[1]}}" value="{{items[6]}}" />
+        </tr>
+        {% endfor %}
+
+        <tr>
+          <th>Total</th>
+          <td>
+            {% set sumOfPrices = userCart | map(attribute=6) | sum %} RM{{
+            sumOfPrices | default(0) }}
+          </td>
+          <input
+            type="hidden"
+            name="total"
+            value="{% set sumOfPrices = userCart | map(attribute=6) | sum %}{{ sumOfPrices | default(0) }}"
+          />
+        </tr>
+      </table>
+    </div>
+  <h1 style="text-align: center;margin-top: 20px;margin-bottom: 10px;">Thank you</h1>
+
+    <div class="select_bank-container">
+      <label for="fpx-bank-element"> FPX Bank </label>
+      <div id="fpx-bank-element">
+        <!-- A Stripe Element will be inserted here. -->
+      </div>
+      <div>
+        <button type="submit">Pay</button>
+      </div>
+    </div>
+
+    <!-- Used to display form errors. -->
+    <div id="error-message" role="alert"></div>
+  </form>
+</section>
+{% else %}
+  <h1 style="text-align: center;margin: 30px 0px;">No items in the cart</h1>
+{% endif %}
+
+  {% else %}
+
+  <h1 style="text-align: center">Login or Register first</h1>
+
+  {% endif %}
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+
+  const addMessage = (message) => {
+    const messagesDiv = document.querySelector("#messages");
+    messagesDiv.style.display = "block";
+    const messageWithLinks = addDashboardLinks(message);
+    messagesDiv.innerHTML += `> ${messageWithLinks}<br>`;
+    console.log(`Debug: ${message}`);
+  };
+
+  // Adds links for known Stripe objects to the Stripe dashboard.
+  const addDashboardLinks = (message) => {
+    const piDashboardBase = "https://dashboard.stripe.com/test/payments";
+    return message.replace(
+      /(pi_(\S*)\b)/g,
+      `<a href="${piDashboardBase}/$1" target="_blank">$1</a>`
+    );
+  };
+  let token = "";
+  let arr = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  for (var i = 0; i < 32; i++) {
+    var ran = arr[Math.floor(Math.random() * 62)];
+    token += ran;
+  }
+
+  let tokenId = document.getElementById("token");
+  if (tokenId) {
+    tokenId.value = token;
+  }
+  let details = {};
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Load the publishable key from the server. The publishable key
+    // is set in your .env file. In practice, most users hard code the
+    // publishable key when initializing the Stripe object.
+
+    const { publishableKey } = await fetch("/config").then((r) => r.json());
+    if (!publishableKey) {
+      addMessage(
+        "No publishable key returned from the server. Please check `.env` and try again"
+      );
+      alert("Please set your Stripe publishable API key in the .env file");
+    }
+
+    const stripe = Stripe(publishableKey, {
+      apiVersion: "2020-08-27",
+    });
+    const elements = stripe.elements();
+    const fpxBank = elements.create("fpxBank", {
+      accountHolderType: "individual",
+    });
+    fpxBank.mount("#fpx-bank-element");
+
+    // When the form is submitted...
+    let isEmpty = true;
+
+    var form = document.getElementById("payment-form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      // Make a call to the server to create a new
+      // payment intent and store its client_secret.
+      const { error: backendError, clientSecret } = await fetch(
+        "/create-payment-intent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            currency: "myr",
+            paymentMethodType: "fpx",
+          }),
+        }
+      ).then((r) => {
+        let formss = document.getElementById("payment-form");
+        for (var i = 0; i < 13; i++) {
+          if (formss[i].value != "") {
+            details[formss[i].name] = formss[i].value;
+            isEmpty = false;
+          }
+        }
+
+        return r.json();
+      });
+      if (isEmpty === true) {
+        alert("All fields are necessary!");
+      } else {
+        details["intent"] = clientSecret;
+
+        const submitForm = fetch(
+          `/cart`,
+          (options = {
+            method: "POST",
+            body: JSON.stringify(details),
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+        );
+      }
+      if (backendError) {
+        addMessage(backendError.message);
+        return;
+      }
+
+
+      const { error: stripeError, paymentIntent } =
+        await stripe.confirmFpxPayment(clientSecret, {
+          payment_method: {
+            fpx: fpxBank,
+          },
+          return_url: `${window.location.origin}/success`,
+        });
+
+      if (stripeError) {
+        addMessage(stripeError.message);
+      }
+
+      addMessage(`Payment ${paymentIntent.status}: ${paymentIntent.id}`);
+    });
+  });
+</script>
+
+
+{% endblock %}

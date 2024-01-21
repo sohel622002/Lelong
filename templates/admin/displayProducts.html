@@ -1,0 +1,67 @@
+{% extends 'admin/base.html' %}
+
+{% block title %} Display Products {% endblock %}
+
+{% block body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
+<h1 class="text-center mt-4"> Display Products</h1>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+{% for d in data %}
+  <div class="col">
+    <div class="card" style="width: 300px;">
+      <img src="{{ url_for('static', filename='inventory/'+d.imagePath) }}" class="card-img-top" alt="..." width="100px" style="height: 200px; width: 300px;">
+      <div class="card-body">
+        <p id="b_{{ d.id }}">{{ d.startingPrice }}</p>
+        <h5 class="card-title">Name: {{d.name }}</h5>
+        <h5 class="card-title">Category: {{d.category}}</h5>
+        <h5 class="card-title">Starting Price: <span id="{{ 'start_' + d.id  | string}}">{{d.startingPrice}}</span></h5>
+        <p class="card-text">Desc: {{d.description}}</p>
+        <input type="number" min="1" value="1" id="{{ 'bidPrice_' + d.id  | string}}">
+        <button onclick="add('{{ 'bidPrice_' + d.id | string }}')">+</button>
+        <button onclick="bid('{{ 'bidPrice_' + d.id | string }}')">Bid</button>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+</div>
+
+<script>
+function add(inputId) {
+    var inputElement = document.getElementById(inputId);
+    if (inputElement) {
+        // Increment the value by 1
+        inputElement.value = parseInt(inputElement.value) + 1;
+    }
+}
+
+const socket = io.connect('http://' + document.domain + ':' + location.port);
+
+socket.on('update_bid', function(data) {
+    let bId = `b_${data.productID}`;
+    let b = document.getElementById(bId);
+    console.log(data)
+    if (b) {
+        b.innerHTML = `${data.currentBid}`;
+    }
+    let sId = `bidPrice_${data.productID}`
+    let c =document.getElementById(sId)
+    if(c){
+    	c.value = `1`
+    }
+    
+
+});
+
+function bid(od) {
+    let amount = {
+        "identity":od,
+        "amount":document.getElementById(od).value
+    }
+
+    // Emit the bid event to the server
+    socket.emit('bid', amount);
+}
+</script>
+
+{% endblock %}

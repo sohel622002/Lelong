@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-section {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: 50px 20px;
+}
+
+.login-top-sec > p {
+  font-size: 18px;
+}
+
+.login-top-sec > p > a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.login-top-sec > h1 {
+  font-size: clamp(1rem, 5vw, 2.5rem);
+}
+
+.form-containers {
+  margin-top: 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 30px 0;
+  display: flex;
+  gap: 30px;
+}
+
+.errorContainer {
+  display: grid;
+  font-family: "Poppins", sans-serif;
+  border-top: 3px solid #b81c23;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+  margin: 40px 40px;
+  padding: 0px 40px;
+}
+
+.errorBox {
+  display: flex;
+  padding: 15px 0px;
+  align-items: center;
+}
+#fullError {
+  color: black;
+
+  font-weight: 200;
+  font-size: 1.1rem;
+}
+#errorStyle {
+  font-weight: 500;
+  color: #666666;
+}
+
+.form-container {
+  flex: 1;
+}
+
+.form-container > h1 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 500;
+}
+
+.form-container > form {
+  margin-top: 15px;
+  border: 1px solid rgb(207, 200, 216);
+  border-radius: 5px;
+  padding: 35px 40px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: start; */
+  gap: 15px;
+}
+
+.label-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-input-wrapper > label {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+}
+
+.label-input-wrapper > input {
+  border: 1px solid rgb(207, 200, 216);
+  margin-top: 10px;
+  font-size: 18px;
+  padding: 15px 20px;
+  border-radius: 30px;
+  width: 100%;
+}
+
+.form-button {
+  cursor: pointer;
+  background-color: #2695ff;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  transition: 0.4s;
+  font-size: 16px;
+}
+.form-button:hover {
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  color: #2695ff;
+}
+.radiobtn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.radiobtn-container > span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.radiobtn-container > span > label {
+  font-size: 18px;
+}
+
+@media (max-width: 1000px) {
+  .form-containers {
+    flex-direction: column;
+  }
+
+  @media (max-width: 1000px) {
+    .form-containers {
+      flex-direction: column;
+    }
+  }
+}

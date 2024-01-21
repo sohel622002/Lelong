@@ -1,0 +1,83 @@
+{% extends 'admin/base.html' %}
+
+
+{% block title %} Display Bids {% endblock %}
+
+{% block body %}
+
+{% if winnerDetails | length > 0 %}
+<div class="container mt-5">
+	<h1 class="text-center">Winner Details</h1>
+	<table class="table table-dark table-hover">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Winner</th>
+	      <th scope="col">Whatsapp Number</th>
+	      <th scope="col">Bidding Price</th>
+	      <th scope="col">Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	{% for winner in winnerDetails %}
+	  	<form method="POST" action="/admin/removewinner">
+		    <tr>
+		      <input type="hidden" name="idValue" value="{{winner.id}}">
+		      <input type="hidden" name="table" value="{{winner.name}}">
+		      <input type="hidden" name="username" value="{{winner.winner}}">
+		      <input type="hidden" name="biddingPrice" value="{{winner.biddingPrice}}">
+		      <th scope="row">{{winner.id}}</th>
+		      <td>{{winner.winner}}</td>
+		      <td>{{winner.whatsappNum}}</td>
+		      <td>{{winner.biddingPrice}}</td>
+		      <td><button class="btn btn-danger btn-sm">Remove Winner</button></td>
+		    </tr>
+		</form>
+
+	    {% endfor %}
+
+	  </tbody>
+
+	</table>
+</div>
+{% endif %}
+
+
+{% if allBids|length > 1 %}
+
+
+<div class="container mt-5">
+	<h1 class="text-center"> All Bids</h1>
+	<table class="table table-hover table-dark">
+	  <thead>
+	    <tr>
+	      <th scope="col">Username</th>
+	      <th scope="col">Current Bid</th>
+	      <th scope="col">Action</th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	  	{% for bids in allBids %}
+	  	<form  method="POST">
+		    <tr>
+		      <input type="hidden" name="idValue" value="{{bids.id}}">
+		      <input type="hidden" name="username" value="{{bids.username}}">
+		      <input type="hidden" name="bidPrice" value="{{bids.currentPrice}}">
+		      <th scope="row">{{bids.username}}</th>
+		      <td>{{bids.currentPrice}}</td>
+		      <td><button type="submit" class="btn btn-primary btn-sm">Select</button></td>
+		    </tr>
+		</form>
+
+		{% endfor %}
+	  </tbody>
+	</table>
+
+	{% else %}
+  <h3 class="text-center mt-5">No Bids</h3>
+{% endif %}
+</div>
+
+
+{% endblock %}

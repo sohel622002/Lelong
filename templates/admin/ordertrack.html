@@ -1,0 +1,116 @@
+{% extends 'admin/base.html' %}
+{% block title %} Order Track {% endblock%}
+{% block body %}
+{% if error %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Error! </strong>{{error}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<div class="container">
+	<form method="POST" action="/admin/ordertrack">
+	  <div class="mb-3">
+	    <label for="track" class="form-label" >Tracking ID</label>
+	    <input type="text" class="form-control" id="track" aria-describedby="track" name="trackingId">
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+
+{% if data %}
+
+<h3 class="text-center mt-5"><strong>Tracking ID: </strong>{{data.trackingid}}</h3>
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Order Processed</th>
+      <th scope="col">Order Shipped</th>
+      <th scope="col">Order on Route</th>
+      <th scope="col">Order Arrived</th>
+      <th scope="col">Date of Arrival</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+<form action="/admin/updatetrack" method="POST">
+    <tr>
+        <th scope="row">1</th>
+
+        </th>
+        <td>
+
+        	        <input type="hidden" name="trackingid" value="{{data.trackingid}}">
+
+            {% if data.orderprocessed %}
+				<div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="orderprocessed" checked value=True>
+				</div>
+            {% else %}
+				<div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="orderprocessed"  >
+				</div>
+            {% endif %}
+
+        </td>
+
+        <td>
+
+
+            {% if data.ordershipped %}
+				<div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="ordershipped" checked>
+				</div>
+            {% else %}
+				<div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="ordershipped" >
+				</div>
+            {% endif %}
+        </td>
+
+        <td>
+            {% if data.orderonroute  %}
+				<div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="orderonroute" checked>
+				</div>
+            {% else %}
+                <div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="orderonroute" >
+				</div>
+            {% endif %}
+        </td>
+
+        <td>
+            {% if data.orderarrived  %}
+				<div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="orderarrived" checked>
+				</div>
+            {% else %}
+                <div class="form-check form-switch">
+				  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="orderarrived" >
+				</div>
+            {% endif %}
+        </td>
+
+        <td>
+        	{% if data.dateofarrival %}
+        	<input type="date" name="arrivalDate" value="{{data.dateofarrival}}">
+        	{% else %}
+				<input type="date" name="arrivalDate" required>
+        	{% endif %}
+
+        </td>
+        <td>
+        	<button type="submit" class="btn btn-primary">Update</button>
+        </td>
+    </tr>
+</form>
+
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

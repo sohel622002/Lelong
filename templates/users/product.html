@@ -1,0 +1,355 @@
+{% extends 'users/base.html' %} {% block title %} Product {% endblock %} {% block
+  body %}
+  
+  
+  <link rel="stylesheet" href="/static/css/home/product.css" />
+  
+  {% if details %}
+  <section class="product-section">
+    <div class="product-sec-header">
+      <div class="product-sec-front">
+  
+        <h1>{{details[0][1] | replace("_dot_",".") | replace("_comma_",",") | replace("_and_","&") | replace("_perc_","%") | replace("_"," ") | replace("-"," ")}}</h1>
+      </div>
+    </div>
+    <div class="product-sec-main">
+      <div class="product-sec-images-container">
+        <div class="product-sec-image">
+          <img src="{{'/static/inventory/'+details[0][5]}}" alt="pc"  id="show_{{details[0][0]}}">
+        </div>
+        <div class="product-images">
+          {% if imgs[0] %}
+            {% for img in imgs[0] %}
+              {% if img %}
+              <img src="{{'/static/inventory/'+img}}" alt="electronic" onclick="showImage(this)">
+              {% endif%}
+            {% endfor %}
+          {% endif %}
+          <img src="{{'/static/inventory/'+details[0][5]}}" alt="electronic" onclick="showImage(this)">
+        </div>
+      </div>
+  
+      <div class="product-sec-detail-wrapper">
+        <h2 class="product-detail">
+          {{details[0][6] }}
+        </h2>
+        {% if details[0][9] == 'OPEN'%}
+        <h1 class="bid-by" id="bidBy">Bid by: <span id="username_{{details[0][0]}}">{{last_document.username}}</span></h1>
+        <h1 class="current-bid" id="currentBid">Current Bid:  RM<span id="{{'bidPrices_'+details[0][0] | string}}">{{last_document.currentPrice}} </span></h1>
+        {% endif %}
+        {% if details[0][9] == 'CLOSE' %}
+        {% if winner %}
+      
+        <h1 class="bid-by">Bid Closed by: <span id="username">{{winner[0][0]}}</span></h1>
+        <h1 class="current-bid">Closed Bid: RM<span id="{{'bidPrices_'+details[0][0] | string}}">{{winner[0][1]}}</span></h1>
+        
+        {% endif%}
+        {% endif %}
+        <h3 class="starting-bid">Starting Bid:  RM<span>{{details[0][3]}}</span></h3>
+  
+        <div class="product-detail-container">
+          <div class="time-left-wrapper">
+            <p class="grey-small-text">Time left :</p>
+            <div class="time-left-container">
+  
+             <div class="time-wrapper">
+                <span class="time-gidit" id="weeks_{{details[0][1]}}">4</span>
+                <span class="time">Weeks</span>
+              </div>
+              <div class="time-wrapper">
+                <span class="time-gidit" id="days_{{details[0][1]}}">4</span>
+                <span class="time">Days</span>
+              </div>
+              <div class="time-wrapper">
+                <span class="time-gidit" id="hours_{{details[0][1]}}">12</span>
+                <span class="time">Hours</span>
+              </div>
+              <div class="time-wrapper">
+                <span class="time-gidit" id="minutes_{{details[0][1]}}">59</span>
+                <span class="time">Minutes</span>
+              </div>
+              <div class="time-wrapper">
+                <span class="time-gidit" id="seconds_{{details[0][1]}}">19</span>
+                <span class="time">Seconds</span>
+              </div>
+            </div>
+          </div>
+          <p class="grey-small-text">
+            Auction Ends: <span id="endingTime_{{details[0][0]}}">July 20, 2024 12:00:00 am</span>
+          </p>
+          <p class="grey-small-text time-zon">Timezone : UTC O</p>
+          <div class="biding-function" id="biddingDetails">
+            <div class="biding-details">
+              {% if loggedIn %}
+  
+              {% if details[0][9] == 'OPEN' %}
+              <span class="biding-price">
+                <button class="plus" style="border: none;background-color: transparent;margin-left: 12px;" onclick="minus('{{ 'bidPrice_' + details[0][0] | string }}')">-</button>
+                <span class="bid-price">
+                  RM
+                <input
+                  type="number"
+                  min="1"
+                  size=6
+                  value="1"
+                  id="{{ 'bidPrice_' + details[0][0]  | string}}"
+                />
+                </span>
+                <button class="plus" style="border: none;background-color: transparent;margin-right: 12px;" onclick="add('{{ 'bidPrice_' + details[0][0] | string }}')">+</button>
+              </span>
+              <button style="border: none;background-color:transparent;cursor:pointer;color: white;text-align: center;"onclick="bid('{{ 'bidPrice_' + details[0][0] | string }}')"
+              id="bidButton" >
+                <span class="bid-links hammer-link fa-solid fa-gavel">
+                </span>
+              </button>
+              <div class="align-heart-icon">
+              <span class="bid-links">
+                <button onclick="addTag(this.dataset.id)" data-id={{details[0][0]}} style="background-color: transparent;border: none;cursor: pointer;" class="">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
+                </span>
+              </div>
+              {% else %}
+              
+              <h1>Bidding Closed</h1>
+  
+              {% endif %}
+              {% else %}
+              {% if details[0][9] == 'OPEN' %}
+  
+              <span class="biding-price">
+                <button class="plus" style="border: none;background-color: transparent;margin-left: 12px;"  disabled>-</button>
+                <span class="bid-price">
+                  RM
+                  <input
+                    type="number"
+                    name="price"
+                    id="{{ 'bidPrice_' + details[0][0]  | string}}"
+                    maxlength="4"
+                    value=1
+                    min=1
+                    disabled
+                  />
+                </span>
+                <button class="plus" style="border: none;background-color: transparent;margin-right: 12px;"  disabled>+</button>
+              </span>
+              <button style="border: none;background-color:transparent;cursor:pointer;color: white;text-align: center;" >
+                <span class="bid-links hammer-link fa-solid fa-gavel" style="background-color:grey">
+                </span>
+              </button>
+              <div class="align-heart-icon">
+                <span class="bid-links">
+                  <button onclick="addTag(this.dataset.id)" data-id={{details[0][0]}} style="background-color: transparent;border: none;cursor: pointer;" class="">
+                      <i class="fa-regular fa-heart"></i>
+                  </button>
+                  </span>
+                </div>
+              {% else %}
+              <h1>Bidding Closed</h1>
+              </button>
+              {% endif %}
+              {% endif %}
+  
+  
+            </div>
+  
+          </div>
+  
+            Categories:
+            <span class="bold-text"
+              >{{details[0][8]}}</span
+            >
+          </p>
+  
+          <div class="navigation-links" style="margin-top: 20px;">
+            <a href="https://wa.me/60109471037?text=Nak%20Join%20Lelong%20shop." class="social-links"
+              ><i class="fa-brands fa-whatsapp"></i
+            ></a>
+            <a href="https://t.me/LelongShopMalaysia" class="social-links"
+              ><i class="fa-brands fa-telegram"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="extra-info-sec" >
+      <div class="info-tabs">
+        <button class="tabs active" data-info="desc">DESCRIPTION</button>
+        <button class="tabs" data-info="auc-history">AUCTION HISTORY</button>
+      </div>
+      <div class="info-section">
+        <div class="desc">
+          <p>
+          {{details[0][4]}}
+  
+          </p>
+        </div>
+        
+        <div class="auc-history info" >
+          <div>{{details[0][11]}}</div>
+          <div>Auction Started</div>
+        </div>
+  
+  
+      </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+    
+    function formatDateTime(dateTimeString) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+  
+      const dateTime = new Date(dateTimeString);
+      const formattedDateTime = dateTime.toLocaleDateString('en-US', options);
+  
+      return formattedDateTime;
+  }
+  
+  
+  
+  document.getElementById("endingTime_{{details[0][0]}}").innerHTML = formatDateTime("{{details[0][10]}}")
+  // Example usage with the provided date "2023-12-09 10:47:59"
+  </script>
+  
+  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.3/socket.io.js"></script>
+  <script src="/static/JS/wishlist.js"></script>
+  <script>
+          const socket = io.connect(location.protocol+'//' + document.domain + ':' + location.port);
+            let adminUserCheck = document.getElementById("username_{{details[0][0]}}")
+                if(adminUserCheck !== null){
+                 if (adminUserCheck.innerHTML.trim() === "admin") {
+                    document.getElementById("bidBy").style.opacity = 0;
+                    document.getElementById("currentBid").style.opacity = 0;
+                }
+                }
+    const tabsBtns = document.querySelectorAll(".tabs");
+    Array.from(tabsBtns).forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        Array.from(tabsBtns).forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        const targetBtn = e.target;
+        const infoDetailTag = targetBtn.dataset.info;
+        const infoDetail = document.querySelectorAll(".info-section > div");
+        targetBtn.classList.add("active");
+        Array.from(infoDetail).map((info) => {
+          info.classList.add("info");
+          if (info.classList.contains(infoDetailTag)) {
+            info.classList.remove("info");
+          }
+        });
+      });
+    });
+      
+    function add(inputId) {
+        var inputElement = document.getElementById(inputId);    
+        if (inputElement) {
+          inputElement.value = parseInt(inputElement.value) + 1;    
+        }
+    }
+  
+    function minus(inputId) {
+        var inputElement = document.getElementById(inputId);    
+        if (inputElement) {
+          inputElement.value = parseInt(inputElement.value) - 1;    
+        }
+    }
+  
+        socket.on('update_bid', function(data) {
+            console.log(data);
+            if (data.response !== undefined) {
+                let responseData = data.response;
+                    document.getElementById("bidBy").style.opacity = 1;
+                    document.getElementById("currentBid").style.opacity = 1;
+  
+                let bId = `bidPrices_${data.productId}`;
+                let b = document.getElementById(bId);
+  
+                if (b) {
+                    b.innerHTML = `${responseData.currentPrice}`;
+                }
+  
+                let sId = `bidPrice_${data.productId}`;
+                console.log(bId)
+                let c = document.getElementById(sId);
+                document.getElementById("username_{{details[0][0]}}").innerHTML = responseData.username;
+            }
+        });
+  
+          function bid(od) {
+              let productName = "{{details[0][1]}}".replace(" ","_")
+              let amount = {
+                  "username":"{{username}}",
+                  "productName":productName,
+                  "identity":od,
+                  "amount":parseInt(document.getElementById(od).value),
+              }
+            document.getElementById('bidButton').disabled = true;
+  
+            setTimeout(function(){
+              document.getElementById('bidButton').disabled = false;
+            },4000)
+              socket.emit('bid', amount);
+            }
+  function calculateTimeDifference(targetDate) {
+    // Convert the target date to a JavaScript Date object
+    const targetDateTime = new Date(targetDate);
+  
+    function updateDifference() {
+      // Get the current date and time
+      const currentDateTime = new Date();
+  
+      // Calculate the time difference in milliseconds
+      const timeDifference = targetDateTime - currentDateTime;
+  
+      // Calculate the time components
+      const seconds = Math.floor(timeDifference / 1000) % 60;
+      const minutes = Math.floor(timeDifference / (1000 * 60)) % 60;
+      const hours = Math.floor(timeDifference / (1000 * 60 * 60)) % 24;
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      
+      // Calculate weeks separately
+      const weeks = Math.floor(days / 7);
+      const remainingDays = days % 7;
+  
+      if(seconds >=0){
+        document.getElementById("weeks_{{details[0][1]}}").innerHTML = weeks;
+        document.getElementById("days_{{details[0][1]}}").innerHTML = remainingDays;
+        document.getElementById("hours_{{details[0][1]}}").innerHTML = hours;
+        document.getElementById("minutes_{{details[0][1]}}").innerHTML = minutes;
+        document.getElementById("seconds_{{details[0][1]}}").innerHTML = seconds;
+      
+      }
+      else{
+        document.getElementById("biddingDetails").innerHTML = "<h1>Bidding Closed for this product</h1>"
+        document.getElementById("weeks_{{details[0][1]}}").innerHTML = 0;
+        document.getElementById("days_{{details[0][1]}}").innerHTML = 0;
+        document.getElementById("hours_{{details[0][1]}}").innerHTML = 0;
+        document.getElementById("minutes_{{details[0][1]}}").innerHTML = 0;
+        document.getElementById("seconds_{{details[0][1]}}").innerHTML = 0;
+  
+      }
+          
+      // Update the time difference every second
+      setTimeout(updateDifference, 1000);
+    }
+  
+    // Initial call to start the countdown
+    updateDifference();
+  }
+  calculateTimeDifference("{{details[0][10]}}");
+  function showImage(element){
+    document.getElementById("show_{{details[0][0]}}").src=element.src
+  }
+  </script>
+  
+  {% else %}
+  
+  <h1 style="text-align:center;margin: 100px 0px">Something went wrong</h1>
+  
+  {% endif %}
+  
+  
+  {% endblock %}
+  

@@ -1,0 +1,84 @@
+{% extends 'admin/base.html' %}
+
+{% block title %} Add Products {% endblock %}
+
+{% block body %}
+{% if error %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+   <strong>Error: </strong> {{error}}
+   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+   <strong>Success: </strong> {{ success }}
+   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<div class="container mt-5">
+	<h1 class="text-center">Add products</h1>
+	<form method="POST" action="/admin/addProducts" enctype="multipart/form-data">
+	  <div class="mb-3">
+	    <label for="productName" class="form-label">Name of the product</label>
+	    <input type="text" class="form-control" id="productName" name="productName"  required>
+	  </div>
+	  <div class="mb-3">
+	    <label for="startingPrice" class="form-label">Starting Price</label>
+	    <input type="number" class="form-control" id="startingPrice" name="startingPrice" pattern="[0-9]" required>
+	  </div>
+	  
+	  <div class="mb-3">
+		  <label for="description" class="form-label">Description</label>
+		  <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+	  </div>
+
+		<div class="mb-3">
+		  <label for="formFileSm" class="form-label">Upload Image 1</label>
+		  <input class="form-control form-control-sm" id="formFileSm" type="file" name="image" required>
+		</div>
+
+		<div class="mb-3">
+		  <label for="formFileSm" class="form-label">Upload Image 2</label>
+		  <input class="form-control form-control-sm" id="formFileSm" type="file" name="image2" >
+		</div>
+
+		<div class="mb-3">
+		  <label for="formFileSm" class="form-label">Upload Image 3</label>
+		  <input class="form-control form-control-sm" id="formFileSm" type="file" name="image3" >
+		</div>
+
+		<div class="mb-3">
+		  <label for="formFileSm" class="form-label">Upload Image 4</label>
+		  <input class="form-control form-control-sm" id="formFileSm" type="file" name="image4" >
+		</div>
+
+		<div class="mb-3">
+		  <label for="formFileSm" class="form-label">Upload Image 5</label>
+		  <input class="form-control form-control-sm" id="formFileSm" type="file" name="image5" >
+		</div>
+
+	  <div class="mb-3">
+	    <label for="category" class="form-label">State</label>
+	    <input type="text" class="form-control" id="state" name="state" >
+	  </div>
+
+	  <div class="mb-3">
+	    <label for="category" class="form-label">Category</label>
+	    <input type="text" class="form-control" id="category" name="category" >
+	  </div>
+
+	  <div class="mb-3">
+	  	<label class="form-label">Max Time: </label>
+	  	<table>
+	  		<tr>
+			  	<td><label class="form-label">Time Limit: </label></td>
+			  	<td><input type="datetime-local" name="datetimeLocal"></td><br>
+			</tr>
+	    </table>
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+</div>
+
+{% endblock %}
