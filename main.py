@@ -204,15 +204,6 @@ UPLOAD_FOLDER = 'static/inventory'
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 CORS(app)
 
-# # Stripe Keys
-# STRIPE_PUB_KEY="pk_live_51ONXseEFL6aVOe7jYDoLUGkc2QDlOZE0A1RblEXMBn6VjUE0giH6XFRomrlmpIwkSQqBQ7yOfqOE47AlCm7XbIj400zOoh6yaq"
-# STRIPE_SECRET_KEY="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"
-STRIPE_PUB_KEY = "pk_live_51ONXseEFL6aVOe7jYDoLUGkc2QDlOZE0A1RblEXMBn6VjUE0giH6XFRomrlmpIwkSQqBQ7yOfqOE47AlCm7XbIj400zOoh6yaq"
-STRIPE_SECRET_KEY = "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"
-
-stripe.api_key = STRIPE_SECRET_KEY
-
-
 def adminPrivs():
   cookie = request.cookies.get("store")
   if cookie is not None:
